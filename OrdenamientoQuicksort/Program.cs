@@ -22,15 +22,27 @@ namespace OrdenamientoQuicksort
             // Stopwatch stopwatch = new Stopwatch();
             // stopwatch.Start();
             //quicksort(vector, 0, vector.Length - 1);
-            // stopwatch.Stop();
+            //// stopwatch.Stop();
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             burbuja(vector);
             stopwatch.Stop();
-            //   mostrar(vector);
+             mostrar(vector);
 
             Console.WriteLine("El tiempo de ejecución fue: " + stopwatch.ElapsedMilliseconds + "[ms]");
+
+            Console.WriteLine("Ingresa el número a buscar ");
+            int X = int.Parse(Console.ReadLine());
+
+            int indice = Binario(vector, X);
+
+            if (indice != -1)
+                Console.WriteLine(" El valor fue encontrado en la posición :" + indice);
+            else
+            {
+                Console.WriteLine("Valor no encontrado");
+            }
 
 
         }
@@ -42,6 +54,50 @@ namespace OrdenamientoQuicksort
                 Console.Write(" {0} ", v[i]);
             }
             Console.WriteLine("\n************************************************");
+        }
+
+
+        public static int Binario(int[] V, int X)
+        {
+            int izq;
+            int der;
+            int centro;
+            bool exito=false;
+
+            izq = 0;
+            der = V.Length - 1;
+            centro = (izq + der) / 2;
+
+            while (izq <= der && !exito )
+            {
+                
+                if(V[centro] == X)
+                {
+                    exito = true;
+                }
+                else
+                {
+                    if( X > V[centro] )
+                    {
+                        izq = centro + 1;
+                    }
+                    else
+                    {
+                        der = centro - 1;
+                    }
+
+                }
+                centro = (izq + der) / 2;
+            }
+            if (exito)
+            {
+                return centro;
+            }
+            else
+            {
+                centro = -1;
+                return centro;
+            }
         }
 
 
